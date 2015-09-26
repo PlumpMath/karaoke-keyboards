@@ -1,4 +1,6 @@
+#pragma once
 #include "ofMain.h"
+#include "Parser.h"
 
 class Lyric{
 public:
@@ -10,11 +12,14 @@ public:
     
     string currentSentence;
     vector<int> typedSentence;
+    vector<int> reachedSentence;
+    vector<char> containerCurrentSentence;
 
-    map<string, string> example;
-    map<string,string>::iterator myIterator;
+    map<string, string> textWithSeconds;
+    map<string,string>::iterator lyricIterator;
 
     int lyricsBoxHeight;
+    int letterCatched();
     ofVec2f bottomCenter;
     
 
@@ -22,5 +27,7 @@ public:
 private:
     void updateScore();
     void getSentence();
+    vector<char> buildContainerCurrentSentence(string str);
+    void comparedCurrentSentenceAndReceivedSentence(int key);
     ofTrueTypeFont	font;
 };

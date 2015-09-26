@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Player.h"
 #include "Lyric.h"
+#include "Score.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,11 +24,11 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        //ofSoundPlayer  beats;
+
         Player         player;
         Lyric          lyric;
+        Score          score;
     
         ofTrueTypeFont	font;
-        //float 			synthPosition;
 		
 };

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F4268391BB69C0B00AAE073 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F4268371BB69C0B00AAE073 /* Parser.cpp */; };
 		6F4DD4A71BAEF9F700813C48 /* Score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F4DD4A51BAEF9F700813C48 /* Score.cpp */; };
 		6FA5814B1BAD73AA00DA9F65 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5814A1BAD73AA00DA9F65 /* Player.cpp */; };
 		6FA581501BAD859C00DA9F65 /* Lyric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5814E1BAD859C00DA9F65 /* Lyric.cpp */; };
@@ -45,6 +46,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6F4268371BB69C0B00AAE073 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		6F4268381BB69C0B00AAE073 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		6F4DD4A51BAEF9F700813C48 /* Score.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Score.cpp; sourceTree = "<group>"; };
 		6F4DD4A61BAEF9F700813C48 /* Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Score.h; sourceTree = "<group>"; };
 		6FA581491BAD738A00DA9F65 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				6FA5814F1BAD859C00DA9F65 /* Lyric.h */,
 				6F4DD4A51BAEF9F700813C48 /* Score.cpp */,
 				6F4DD4A61BAEF9F700813C48 /* Score.h */,
+				6F4268371BB69C0B00AAE073 /* Parser.cpp */,
+				6F4268381BB69C0B00AAE073 /* Parser.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -216,6 +221,7 @@
 				6FA581501BAD859C00DA9F65 /* Lyric.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				6F4DD4A71BAEF9F700813C48 /* Score.cpp in Sources */,
+				6F4268391BB69C0B00AAE073 /* Parser.cpp in Sources */,
 				6FA5814B1BAD73AA00DA9F65 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,7 @@ void Player::setup(string file){
     ofPlayer.load("song.mp3");
     ofPlayer.setVolume(0.75f);
     ofPlayer.setMultiPlay(false);
+    playerPostion = ofVec2f(0, 0);
 };
 
 void Player::update(){
@@ -24,7 +25,7 @@ int Player::getTime(){
 
 void Player::draw(){
     ofSetColor(100, 200, 100);
-    ofDrawRectangle(0,0,ofGetWidth(),100);
+    ofDrawRectangle(playerPostion.x,playerPostion.y,ofGetWidth(),100);
     ofSetColor(0, 0, 0);
 
     string tempStr = "click and drag\npct done: "+

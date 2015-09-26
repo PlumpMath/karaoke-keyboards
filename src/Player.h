@@ -1,3 +1,4 @@
+#pragma once
 #include "ofMain.h"
 
 class Player{
@@ -9,6 +10,7 @@ public:
     void update();
     void draw();
     int getTime();
+    ofVec2f playerPostion;
     
     ofSoundPlayer ofPlayer;
     ofTrueTypeFont	font;
