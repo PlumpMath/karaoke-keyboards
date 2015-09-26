@@ -2,16 +2,28 @@
 #include <regex>
 
 
-string Parser::stringWithValidChars(string str){
+string Parser::stringWithValidChars(string _str, string _reg){
     smatch match;
-    regex regEx("[a-z_0-9]", regex_constants::icase);
+    regex regEx(_reg, regex_constants::icase);
     
     stringstream buffer;
-    while (regex_search (str,match,regEx)) {
+    while (regex_search (_str,match,regEx)) {
         for (auto x : match){
             buffer << x;
         }
-        str = match.suffix().str();
+        _str = match.suffix().str();
     }
     return buffer.str();
+}
+
+bool Parser::isValidKey(int keyPressed, string _reg){
+    stringstream buffer;
+    regex regEx(_reg, regex_constants::icase);
+    buffer << char(keyPressed);
+    if (regex_match(buffer.str(), regEx)) {
+        return true;
+    }else{
+        return false;
+    }
+    
 }

@@ -8,26 +8,20 @@ public:
     void setup(string filename);
     void update(int time);
     void draw();
-    void getLetter(int key);
+    bool letterCatched(int key);
     
     string currentSentence;
-    vector<int> typedSentence;
-    vector<int> reachedSentence;
-    vector<char> containerCurrentSentence;
-
+    string sentenceToType;
+    stringstream typedSentenceCorrect;
+    int positionReachedInCurrentSentence;
     map<string, string> textWithSeconds;
     map<string,string>::iterator lyricIterator;
-
     int lyricsBoxHeight;
-    int letterCatched();
     ofVec2f bottomCenter;
-    
-
     
 private:
     void updateScore();
     void getSentence();
-    vector<char> buildContainerCurrentSentence(string str);
     void comparedCurrentSentenceAndReceivedSentence(int key);
     ofTrueTypeFont	font;
 };

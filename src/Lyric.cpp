@@ -69,27 +69,24 @@ void Lyric::setup(string filename){
     bottomCenter = ofVec2f(ofGetWidth()/2, ofGetHeight()-lyricsBoxHeight);
 };
 
-void Lyric::getLetter(int key){
-    //cout << key << endl;
-    typedSentence.push_back(key);
-    comparedCurrentSentenceAndReceivedSentence(key);
-}
-
 void Lyric::update(int timeInMS){
-    timeInMS -= 1000;
     int songMinutes = (timeInMS/60000)%60;
     int songSeconds = (timeInMS/1000)%60;
+    //cout << ofToString(songSeconds) << endl;
 
     string lyricMinutes = lyricIterator->first.substr(0,2);
     string lyricSeconds = lyricIterator->first.substr(3,2);
-    //updateScore();
+    
     if (songMinutes >= ofToInt(lyricMinutes) && songSeconds >= ofToInt(lyricSeconds)) {
+        //init next sentence
         currentSentence = lyricIterator->second;
-        vector<char> containerCurrentSentence(currentSentence.begin(), currentSentence.end());
-        typedSentence.clear();
+        string parsed = Parser::stringWithValidChars(currentSentence, "[a-z_0-9]");
+        sentenceToType = ofToLower(parsed);
+        positionReachedInCurrentSentence = 0;
+        
+        //empty previously typed sentence
+        typedSentenceCorrect.str(string());
         ++lyricIterator;
-
-        //containerCurrentSentence = buildContainerCurrentSentence(currentSentence);
     }
 };
 
@@ -105,39 +102,23 @@ void Lyric::draw(){
         ofRectangle readBounds = font.getStringBoundingBox(toRead, 0, 0);
         font.drawString(currentSentence, -readBounds.width/2, (lyricsBoxHeight/3)+readBounds.height );
         
-        string keyPressed;
+        string strCorrect = typedSentenceCorrect.str();
         ofSetColor(100, 200, 200);
-        for (auto const& s : typedSentence) { keyPressed += s; }
-        ofRectangle keyPressedBounds = font.getStringBoundingBox(keyPressed, 0, 0);
-        font.drawString(keyPressed, -keyPressedBounds.width/2, (lyricsBoxHeight/2)+readBounds.height);
+        ofRectangle keyPressedBounds = font.getStringBoundingBox(strCorrect, 0, 0);
+        font.drawString(strCorrect, -keyPressedBounds.width/2, (lyricsBoxHeight/2)+readBounds.height);
     ofPopMatrix();
 };
 
 
-
-int Lyric::letterCatched(){
-    return 1;
-}
-
-vector<char> buildContainerCurrentSentence(string _sentence){
-    //string str = Parser::stringWithValidChars(_sentence);
-    vector<char> data(_sentence.begin(), _sentence.end());
-}
-
-void Lyric::comparedCurrentSentenceAndReceivedSentence(int key){
-    for (auto typed : typedSentence) {
-        cout << "asdas" << endl;
-        char test = 'a';
-        if (char(typed) == test){
-            cout << "casa" << endl;
-            //cout << containerCurrentSentence.first << endl;
-        }
-        cout << typed << endl;
+bool Lyric::letterCatched(int _key){
+    if (!Parser::isValidKey(_key, "[a-z_0-9]")){ return false; };
+    
+    string typedString(1, _key);
+    if (typedString == sentenceToType.substr(positionReachedInCurrentSentence,1)){
+        typedSentenceCorrect <<  typedString;
+        positionReachedInCurrentSentence ++;
+        return true;
+    }else{
+        return false;
     }
-    //typedSentence itera tra le lettere typed, se e' giusta incrementa il puntatore su vectorCurrentSentence e aumenta lo scora
-    // se e' sbagliata lascia il puntatore dove e' e non far nulla.
-    // finito questo verifica se ti serve tutto
-    //vector<char> vectorCurrentSentence(currentSentence.begin(), currentSentence.end());
-    
-    
 }

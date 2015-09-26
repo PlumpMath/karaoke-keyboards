@@ -9,7 +9,7 @@ void Player::play(){
 }
 
 void Player::setup(string file){
-    ofPlayer.load("song.mp3");
+    ofPlayer.load(file);
     ofPlayer.setVolume(0.75f);
     ofPlayer.setMultiPlay(false);
     playerPostion = ofVec2f(0, 0);

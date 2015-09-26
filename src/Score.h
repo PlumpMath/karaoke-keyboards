@@ -7,10 +7,11 @@ class Score{
 public:
     Score();
     void setup(map<string, string> textWithSeconds);
-    void update(int rightKey);
+    void onePointMore();
     void draw();
     
     int totPoints;
+    int actualPoints;
     ofVec2f scorePositon;
     ofVec2f paddingRightTop;
     ofTrueTypeFont font;

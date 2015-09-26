@@ -2,10 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    
     // on OSX: if you want to use ofSoundPlayer together with ofSoundStream you need to synchronize buffersizes.
     // use ofFmodSetBuffersize(bufferSize) to set the buffersize in fmodx prior to loading a file.
-    player.setup("song.mp3");
+    player.setup("qua.mp3");
     lyric.setup("lyrics.txt");
     score.setup(lyric.textWithSeconds);
 }
@@ -13,9 +12,9 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     ofBackground(255,255,255);
-    player.update();
+
     lyric.update(player.getTime());
-    score.update(lyric.letterCatched());
+    player.update();
 }
 
 //--------------------------------------------------------------
@@ -25,10 +24,19 @@ void ofApp::draw(){
     score.draw();
 }
 
+void ofApp::startSongFromBeginning(){
+    score.setup(lyric.textWithSeconds);
+    lyric.setup("lyrics.txt");
+    player.play();
+}
 //--------------------------------------------------------------
 void ofApp::keyPressed  (int key){
-    cout << key << endl;
-    lyric.getLetter(key);
+    if(lyric.letterCatched(key)){
+        score.onePointMore();
+    }
+    if (key == 13) { //press enter
+        startSongFromBeginning();
+    }
 }
 
 //--------------------------------------------------------------
@@ -48,9 +56,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    score.setup(lyric.textWithSeconds);
-    lyric.setup("lyrics.txt");
-    player.play();
+    startSongFromBeginning();
 }
 
 //--------------------------------------------------------------
@@ -73,7 +79,6 @@ void ofApp::windowResized(int w, int h){
     player.setup("song.mp3");
     lyric.setup("lyrics.txt");
     score.setup(lyric.textWithSeconds);
-    
 }
 
 //--------------------------------------------------------------
