@@ -4,29 +4,35 @@
 void ofApp::setup(){
     // on OSX: if you want to use ofSoundPlayer together with ofSoundStream you need to synchronize buffersizes.
     // use ofFmodSetBuffersize(bufferSize) to set the buffersize in fmodx prior to loading a file.
+    colorTextToType = ofColor(54,166,144);
+    colorTextTyped = ofColor(249,64,128);
+    colorBgGradientFirst = ofColor(251,172,79);
+    colorBgGradientSecond = ofColor(255,207,117);
     player.setup("qua.mp3");
-    lyric.setup("lyrics.txt");
-    score.setup(lyric.textWithSeconds);
+    lyric.setup("lyrics.txt", colorTextTyped, colorTextToType);
+    score.setup(lyric.textWithSeconds, colorTextTyped, colorTextToType);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    ofBackground(255,255,255);
-
     lyric.update(player.getTime());
     player.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackgroundGradient(colorBgGradientFirst, colorBgGradientSecond, OF_GRADIENT_CIRCULAR);
+    
     player.draw();
     lyric.draw();
     score.draw();
 }
 
 void ofApp::startSongFromBeginning(){
-    score.setup(lyric.textWithSeconds);
-    lyric.setup("lyrics.txt");
+//    ofColor colorTextToType = ofColor(255,175,140);
+//    ofColor colorTextTyped = ofColor(255,143,201);
+    //score.setup(lyric.textWithSeconds, colorTextTyped);
+    //lyric.setup("lyrics.txt", colorTextToType, colorTextTyped);
     player.play();
 }
 //--------------------------------------------------------------
@@ -76,9 +82,7 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    player.setup("song.mp3");
-    lyric.setup("lyrics.txt");
-    score.setup(lyric.textWithSeconds);
+    setup();
 }
 
 //--------------------------------------------------------------

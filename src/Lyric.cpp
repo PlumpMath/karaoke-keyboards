@@ -4,7 +4,7 @@ Lyric::Lyric(){
     
 };
 
-void Lyric::setup(string filename){
+void Lyric::setup(string filename, ofColor _colorTextToType, ofColor _colorTextTyped){
     textWithSeconds = {
         {"00:01","Is this the real life -"},
         {"00:03","Is this just fantasy -"},
@@ -64,9 +64,13 @@ void Lyric::setup(string filename){
     };
     lyricIterator = textWithSeconds.begin();
     currentSentence = "";
-    lyricsBoxHeight = ofGetHeight()/5;
-    font.loadFont("BEBAS.ttf", lyricsBoxHeight/8);
-    bottomCenter = ofVec2f(ofGetWidth()/2, ofGetHeight()-lyricsBoxHeight);
+    lyricsBoxHeight = 300;
+    font.loadFont("BEBAS.ttf", 30);
+    font.setSpaceSize(6.0);
+    //font.setLetterSpacing(1.0);
+    center = ofVec2f(ofGetWidth()/2, ofGetHeight()/2);
+    colorTextTyped = _colorTextTyped;
+    colorTextToType = _colorTextToType;
 };
 
 void Lyric::update(int timeInMS){
@@ -92,20 +96,20 @@ void Lyric::update(int timeInMS){
 
 void Lyric::draw(){
     ofPushMatrix();
-        ofTranslate(bottomCenter.x, bottomCenter.y);
+        ofTranslate(center.x, center.y);
         
-        ofSetColor(243, 239, 111);
-        ofDrawRectangle(-bottomCenter.x, 0, ofGetWidth(),lyricsBoxHeight);
+        //ofSetColor(243, 239, 111);
+        //ofDrawRectangle(-bottomCenter.x, 0, ofGetWidth(),lyricsBoxHeight);
         
         string toRead = currentSentence;
-        ofSetColor(0,0,0);
+        ofSetColor(colorTextTyped.r, colorTextTyped.g,colorTextTyped.b);
         ofRectangle readBounds = font.getStringBoundingBox(toRead, 0, 0);
-        font.drawString(currentSentence, -readBounds.width/2, (lyricsBoxHeight/3)+readBounds.height );
+        font.drawString(currentSentence, -readBounds.width/2, -readBounds.height );
         
         string strCorrect = typedSentenceCorrect.str();
-        ofSetColor(100, 200, 200);
+        ofSetColor(colorTextToType.r, colorTextToType.g,colorTextToType.b);
         ofRectangle keyPressedBounds = font.getStringBoundingBox(strCorrect, 0, 0);
-        font.drawString(strCorrect, -keyPressedBounds.width/2, (lyricsBoxHeight/2)+readBounds.height);
+        font.drawString(strCorrect, -keyPressedBounds.width/2, +readBounds.height);
     ofPopMatrix();
 };
 

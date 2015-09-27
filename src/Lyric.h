@@ -5,7 +5,7 @@
 class Lyric{
 public:
     Lyric();
-    void setup(string filename);
+    void setup(string filename, ofColor colorTextToType, ofColor colorTextTyped);
     void update(int time);
     void draw();
     bool letterCatched(int key);
@@ -17,11 +17,11 @@ public:
     map<string, string> textWithSeconds;
     map<string,string>::iterator lyricIterator;
     int lyricsBoxHeight;
-    ofVec2f bottomCenter;
+    ofVec2f center;
+    ofColor colorTextToType;
+    ofColor colorTextTyped;
     
 private:
-    void updateScore();
-    void getSentence();
-    void comparedCurrentSentenceAndReceivedSentence(int key);
+    void loadFile(string filename);
     ofTrueTypeFont	font;
 };

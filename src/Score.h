@@ -6,12 +6,14 @@
 class Score{
 public:
     Score();
-    void setup(map<string, string> textWithSeconds);
+    void setup(map<string, string> textWithSeconds, ofColor colorTextTyped, ofColor colorTextToType);
     void onePointMore();
     void draw();
     
     int totPoints;
     int actualPoints;
+    ofColor colorTextTyped;
+    ofColor colorTextToType;
     ofVec2f scorePositon;
     ofVec2f paddingRightTop;
     ofTrueTypeFont font;

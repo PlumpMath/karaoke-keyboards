@@ -6,7 +6,9 @@ Score::Score(){
 
 }
 
-void Score::setup(map<string,string> text_with_seconds){
+void Score::setup(map<string,string> text_with_seconds, ofColor _colorTextTyped, ofColor _colorTextToType){
+    colorTextTyped = _colorTextTyped;
+    colorTextToType = _colorTextToType;
     totPoints = 0;
     actualPoints = 0;
     for (map<string,string>::iterator it=text_with_seconds.begin(); it!=text_with_seconds.end(); it++) {
@@ -27,16 +29,25 @@ void Score::draw(){
     ofPushMatrix();
         ofTranslate(scorePositon.x, scorePositon.y);
         string maxPoints = ofToString(totPoints);
-        string pointsNow = ofToString(actualPoints);
-        string score = pointsNow.append(" / ").append(maxPoints);
-    
-        ofSetColor(0,0,0);
-        ofRectangle scoreBounds = font.getStringBoundingBox(score, 0, 0);
+        string pointsNow = ofToString(actualPoints).append(" : ");
+
+        //draw point to reach
+        ofSetColor(colorTextToType.r, colorTextToType.g,colorTextToType.b);
+        ofRectangle maxPointsBounds = font.getStringBoundingBox(maxPoints, 0, 0);
         font.drawString(
-                        score,
-                        -scoreBounds.width-paddingRightTop.x,
-                        (scorePositon.y + paddingRightTop.y+ scoreBounds.height)
+                        maxPoints,
+                        -maxPointsBounds.width-paddingRightTop.x,
+                        (scorePositon.y + paddingRightTop.y+ maxPointsBounds.height)
         );
+    
+        //draw points reached
+        ofSetColor(colorTextTyped.r, colorTextTyped.g,colorTextTyped.b);
+        ofRectangle pointsNowBounds = font.getStringBoundingBox(pointsNow, 0, 0);
+        font.drawString(
+                        pointsNow,
+                        -pointsNowBounds.width-maxPointsBounds.width-paddingRightTop.x,
+                        (scorePositon.y + paddingRightTop.y+ pointsNowBounds.height)
+                        );
     ofPopMatrix();
 };
 

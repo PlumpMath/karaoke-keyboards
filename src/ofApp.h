@@ -25,11 +25,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-
-        Player         player;
-        Lyric          lyric;
-        Score          score;
-    
+        ofColor         colorTextToType;
+        ofColor         colorTextTyped;
+        ofColor         colorBgGradientFirst;
+        ofColor         colorBgGradientSecond;
+        Player          player;
+        Lyric           lyric;
+        Score           score;
         ofTrueTypeFont	font;
 		
 };

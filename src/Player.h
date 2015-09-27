@@ -11,7 +11,7 @@ public:
     void draw();
     int getTime();
     ofVec2f playerPostion;
-    
+    bool debug = false;
     ofSoundPlayer ofPlayer;
     ofTrueTypeFont	font;
     
