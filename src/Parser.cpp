@@ -17,10 +17,8 @@ string Parser::stringWithValidChars(string _str, string _reg){
 }
 
 bool Parser::isValidKey(int keyPressed, string _reg){
-    stringstream buffer;
-    regex regEx(_reg, regex_constants::icase);
-    buffer << char(keyPressed);
-    if (regex_match(buffer.str(), regEx)) {
+    string typedKey(1, keyPressed);
+    if (regex_match(typedKey, regEx)) {
         return true;
     }else{
         return false;
