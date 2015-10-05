@@ -62,6 +62,7 @@ void Lyric::setup(string filename, ofColor _colorTextToType, ofColor _colorTextT
         {"05:18","Nothing really matters -, nothing really matters to me"},
         {"05:43","Any way the wind blows..."}
     };
+    wrongKeysAlpha = 255;
     lyricIterator = textWithSeconds.begin();
     currentSentence = "";
     lyricsBoxHeight = 300;
@@ -88,8 +89,9 @@ void Lyric::update(int timeInMS){
         sentenceToType = ofToLower(parsed);
         positionReachedInCurrentSentence = 0;
         
-        //empty previously typed sentence
+        //empty previously typed sentence and errors
         typedSentenceCorrect.str(string());
+        wrongKeys.clear();
         ++lyricIterator;
     }
 };
@@ -108,8 +110,11 @@ void Lyric::draw(){
         
         string strCorrect = typedSentenceCorrect.str();
         ofSetColor(colorTextToType.r, colorTextToType.g,colorTextToType.b);
-        ofRectangle keyPressedBounds = font.getStringBoundingBox(strCorrect, 0, 0);
-        font.drawString(strCorrect, -keyPressedBounds.width/2, +readBounds.height);
+        ofRectangle keyCorrectBounds = font.getStringBoundingBox(strCorrect, 0, 0);
+        int strCorrectHalfWidth = keyCorrectBounds.width/2;
+        font.drawString(strCorrect, -strCorrectHalfWidth, +readBounds.height);
+    
+        drawErrors(strCorrectHalfWidth, readBounds.height*2);
     ofPopMatrix();
 };
 
@@ -123,6 +128,35 @@ bool Lyric::letterCatched(int _key){
         positionReachedInCurrentSentence ++;
         return true;
     }else{
+        Letter tmpLetter;
+        tmpLetter.setup(typedString, colorTextTyped);
+        wrongTyped.push_back(tmpLetter);
+        wrongKeys.insert(make_pair(typedString, wrongKeysAlpha));
         return false;
+    }
+}
+
+void Lyric::drawErrors(int posX, int posY){
+//    ofSetColor(243, 239, 111);
+//    ofDrawRectangle(posX, posY, 200,100);
+//    map<string,int>::iterator it;
+//    for(it = wrongKeys.begin(); it != wrongKeys.end(); it++){
+//        it->second -= 1;
+//        float dissolvingY = ofMap(float(it->second), 255.f, 0.f, float(posY), 300);
+//        cout << "diss" << it->second << endl;
+//        cout << "diss" << dissolvingY<< endl;
+//        ofSetColor(colorTextTyped.r, colorTextTyped.g,colorTextTyped.b, it->second);
+//        font.drawString(it->first, posX, dissolvingY);
+//    }
+    vector<Letter>::iterator it;
+    for(it = wrongTyped.begin(); it!= wrongTyped.end(); it++){
+        // devi avere il pointer per potercambiare alfa
+        it->alpha -= 1;
+        float pct = Penner::easeOutExpo(it->alpha, 0.0, 1.0, 255);
+        it->update(pct);
+        ofSetColor(colorTextTyped.r, colorTextTyped.g,colorTextTyped.b, it->alpha);
+        font.drawString(it->strLetter, it->currentPostion.x, it->currentPostion.y);
+
+        
     }
 }

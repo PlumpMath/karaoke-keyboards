@@ -1,6 +1,8 @@
 #pragma once
 #include "ofMain.h"
 #include "Parser.h"
+#include "Letter.h"
+#include "penner.h"
 
 class Lyric{
 public:
@@ -13,15 +15,23 @@ public:
     string currentSentence;
     string sentenceToType;
     stringstream typedSentenceCorrect;
+    
     int positionReachedInCurrentSentence;
     map<string, string> textWithSeconds;
     map<string,string>::iterator lyricIterator;
+    
+    vector<Letter> wrongTyped;
+    
+    int wrongKeysAlpha;
+    multimap<string,int> wrongKeys;
     int lyricsBoxHeight;
+    
     ofVec2f center;
     ofColor colorTextToType;
     ofColor colorTextTyped;
     
 private:
+    void drawErrors(int posX, int posY);
     void loadFile(string filename);
     ofTrueTypeFont	font;
 };
