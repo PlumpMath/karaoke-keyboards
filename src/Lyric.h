@@ -17,13 +17,12 @@ public:
     stringstream typedSentenceCorrect;
     
     int positionReachedInCurrentSentence;
+    ofVec2f witdhCurrentSentence;
     map<string, string> textWithSeconds;
     map<string,string>::iterator lyricIterator;
     
     vector<Letter> wrongTyped;
     
-    int wrongKeysAlpha;
-    multimap<string,int> wrongKeys;
     int lyricsBoxHeight;
     
     ofVec2f center;

@@ -3,16 +3,17 @@
 
 class Letter{
 public:
-    Letter();
-    void setup(string strLetter, ofColor color);
+    Letter(string strLetter, ofVec2f cursorPosition, ofColor color);
+    void setup();
     void update(float point);
     void draw();
     
     string strLetter;
     ofColor color;
-    ofVec2f startPostion;
-    ofVec2f endPostion;
-    ofVec2f currentPostion;
+    ofVec2f startPosition;
+    ofVec2f endPosition;
+    ofVec2f currentPosition;
+    ofVec2f direction;
     
     int alpha = 255;
 };
