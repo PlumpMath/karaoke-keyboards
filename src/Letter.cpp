@@ -2,9 +2,13 @@
 
 Letter::Letter(string _strLetter, ofVec2f _cursorPosition, ofColor _color){
     strLetter = _strLetter;
-    startPosition = _cursorPosition;
+    //when no right typed letter was entered, the _cursorPosition has negative values
+    if(_cursorPosition.x <= 0)
+        startPosition = ofVec2f(0, 0);
+    else
+        startPosition = _cursorPosition;
     color = _color;
-    endPosition = ofVec2f(startPosition.x, ofGetHeight());
+    endPosition = ofVec2f(startPosition.x, ofGetHeight()/2);
     direction = startPosition - endPosition;
 }
 

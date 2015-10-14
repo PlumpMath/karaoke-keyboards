@@ -5,19 +5,19 @@ Score::Score(){
 
 }
 
-void Score::setup(map<string,string> text_with_seconds, ofColor _colorTextTyped, ofColor _colorTextToType){
+void Score::setup(map<int,string> text_with_milliseconds, ofColor _colorTextTyped, ofColor _colorTextToType){
     colorTextTyped = _colorTextTyped;
     colorTextToType = _colorTextToType;
     totPoints = 0;
     actualPoints = 0;
-    for (map<string,string>::iterator it=text_with_seconds.begin(); it!=text_with_seconds.end(); it++) {
+    for (map<int,string>::iterator it=text_with_milliseconds.begin(); it!=text_with_milliseconds.end(); it++) {
         string str = it->second;
         totPoints += Parser::stringWithValidChars(str, "[a-z_0-9]").length();
     }
     
     paddingRightTop = ofVec2f(30,30);
     scorePositon = ofVec2f(ofGetWidth(), 0);
-    font.loadFont("BEBAS.ttf", 30);
+    font.load("BEBAS.ttf", 30);
 };
 
 void Score::onePointMore(){

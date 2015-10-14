@@ -24,5 +24,13 @@ bool Parser::isValidKey(int keyPressed, string _reg){
     }else{
         return false;
     }
-    
+}
+
+bool Parser::isStringInRegex(string _line, string _reg){
+    regex regEx(_reg, regex_constants::icase);
+    if (regex_match(_line, regEx)) {
+        return true;
+    }else{
+        return false;
+    }
 }

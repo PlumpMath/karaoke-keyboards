@@ -10,6 +10,7 @@ public:
     void setup(string filename, ofColor colorTextToType, ofColor colorTextTyped);
     void update(int time);
     void draw();
+
     bool letterCatched(int key);
     
     string currentSentence;
@@ -17,20 +18,19 @@ public:
     stringstream typedSentenceCorrect;
     
     int positionReachedInCurrentSentence;
-    ofVec2f witdhCurrentSentence;
-    map<string, string> textWithSeconds;
-    map<string,string>::iterator lyricIterator;
+    ofVec2f positionCurrentSentence;
+    map<int, string> textWithMilliseconds;
+    map<int,string>::iterator textWithMsIterator;
     
     vector<Letter> wrongTyped;
     
     int lyricsBoxHeight;
-    
     ofVec2f center;
     ofColor colorTextToType;
     ofColor colorTextTyped;
     
 private:
-    void drawErrors(int posX, int posY);
-    void loadFile(string filename);
+    void load(string filename);
+    void drawErrors();
     ofTrueTypeFont	font;
 };

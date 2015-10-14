@@ -8,9 +8,9 @@ void ofApp::setup(){
     colorTextTyped = ofColor(249,64,128);
     colorBgGradientFirst = ofColor(251,172,79);
     colorBgGradientSecond = ofColor(255,207,117);
-    player.setup("qua.mp3");
-    lyric.setup("lyrics.txt", colorTextTyped, colorTextToType);
-    score.setup(lyric.textWithSeconds, colorTextTyped, colorTextToType);
+    player.setup("BohemianRhapsody.mp3");
+    lyric.setup("BohemianRhapsody.lrc", colorTextTyped, colorTextToType);
+    score.setup(lyric.textWithMilliseconds, colorTextTyped, colorTextToType);
 }
 
 //--------------------------------------------------------------
@@ -22,26 +22,18 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackgroundGradient(colorBgGradientFirst, colorBgGradientSecond, OF_GRADIENT_CIRCULAR);
-    
     player.draw();
     lyric.draw();
     score.draw();
 }
 
 void ofApp::startSongFromBeginning(){
-//    ofColor colorTextToType = ofColor(255,175,140);
-//    ofColor colorTextTyped = ofColor(255,143,201);
-    //score.setup(lyric.textWithSeconds, colorTextTyped);
-    //lyric.setup("lyrics.txt", colorTextToType, colorTextTyped);
     player.play();
 }
 //--------------------------------------------------------------
 void ofApp::keyPressed  (int key){
     if(lyric.letterCatched(key)){
         score.onePointMore();
-    }
-    if (key == 13) { //press enter
-        startSongFromBeginning();
     }
 }
 
